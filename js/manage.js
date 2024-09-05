@@ -6,79 +6,79 @@ function loadCompetitions() {
         .then(response => response.json())
         .then(data => {
             competitions = data;
-            populateCompetitionList(); // 显示所有竞赛信息
-            populateForm(0); // 默认填充第一个竞赛信息
+            displayCompetitionList();
         })
         .catch(error => console.error('加载竞赛数据时出错:', error));
 }
 
-// 动态填充表单
-function populateForm(index) {
-    const competition = competitions[index];
-    document.getElementById('competition-name').value = competition.name;
-    document.getElementById('competition-category').value = competition.category;
-    document.getElementById('competition-date').value = competition.signup_deadline.split('T')[0]; // 取日期部分
-    document.getElementById('updateForm').setAttribute('data-index', index); // 保存当前编辑的索引
-}
-
-// 显示所有竞赛信息
-function populateCompetitionList() {
+// 显示竞赛列表
+function displayCompetitionList() {
     const competitionList = document.getElementById('competition-list');
     competitionList.innerHTML = ''; // 清空列表
+
     competitions.forEach((competition, index) => {
-        const listItem = document.createElement('li');
-        listItem.textContent = competition.name;
-        listItem.onclick = () => populateForm(index); // 点击列表项填充表单
-        competitionList.appendChild(listItem);
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${competition.name}</td>
+            <td>${competition.category}</td>
+            <td>${competition.signup_deadline.split('T')[0]}</td>
+            <td>${competition.submission_deadline.split('T')[0]}</td>
+            <td>${competition.status || '未生效'}</td>
+            <td>
+                <button class="details-btn" onclick="viewDetails(${index})">详情</button>
+                <button class="edit-btn" onclick="editCompetition(${index})">编辑</button>
+                <button class="delete-btn" onclick="deleteCompetition(${index})">删除</button>
+            </td>
+        `;
+
+        competitionList.appendChild(row);
     });
 }
 
-// 更新竞赛信息
-function updateCompetition() {
-    const index = document.getElementById('updateForm').getAttribute('data-index');
-    competitions[index] = {
+// 编辑竞赛
+function editCompetition(index) {
+    const competition = competitions[index];
+    document.getElementById('competition-id').value = index;
+    document.getElementById('competition-name').value = competition.name;
+    document.getElementById('competition-category').value = competition.category;
+    document.getElementById('competition-signup').value = competition.signup_deadline.split('T')[0];
+    document.getElementById('competition-submission').value = competition.submission_deadline.split('T')[0];
+}
+
+// 保存竞赛信息
+document.getElementById('competitionForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const id = document.getElementById('competition-id').value;
+
+    const updatedCompetition = {
         name: document.getElementById('competition-name').value,
         category: document.getElementById('competition-category').value,
-        signup_deadline: document.getElementById('competition-date').value + 'T23:59:59', // 拼接时间部分
-        submission_deadline: competitions[index].submission_deadline,
-        level: competitions[index].level,
-        params_file: competitions[index].params_file,
-        recommendation: competitions[index].recommendation,
-        website: competitions[index].website,
-        remarks: competitions[index].remarks
+        signup_deadline: document.getElementById('competition-signup').value + 'T23:59:59',
+        submission_deadline: document.getElementById('competition-submission').value + 'T23:59:59'
     };
 
-    // 调用 updateCompetitionOnGitHub 更新 GitHub 上的文件
-    updateCompetitionOnGitHub(competitions);
+    if (id) {
+        competitions[id] = updatedCompetition;
+    } else {
+        competitions.push(updatedCompetition);
+    }
+
+    displayCompetitionList();
+});
+
+// 删除竞赛
+function deleteCompetition(index) {
+    competitions.splice(index, 1);
+    displayCompetitionList();
 }
 
-// 添加新的竞赛
-function addCompetition() {
-    const newCompetition = {
-        name: document.getElementById('competition-name').value,
-        category: document.getElementById('competition-category').value,
-        signup_deadline: document.getElementById('competition-date').value + 'T23:59:59', // 拼接时间部分
-        submission_deadline: "2024-12-31T23:59:59", // 默认提交截止日期
-        level: "国赛", // 默认等级
-        params_file: "",
-        recommendation: 5.0,
-        website: "",
-        remarks: "新添加的竞赛"
-    };
-    competitions.push(newCompetition);
-    populateCompetitionList(); // 更新列表显示
-
-    // 调用 updateCompetitionOnGitHub 将新竞赛添加到 GitHub 文件
-    updateCompetitionOnGitHub(competitions);
+// 详情查看
+function viewDetails(index) {
+    const competition = competitions[index];
+    alert(`竞赛名称: ${competition.name}\n类别: ${competition.category}`);
 }
 
-// 删除当前竞赛
-function deleteCompetition() {
-    const index = document.getElementById('updateForm').getAttribute('data-index');
-    competitions.splice(index, 1); // 删除指定竞赛
-    populateCompetitionList(); // 更新列表显示
-    alert('竞赛已删除');
-
-    // 调用 updateCompetitionOnGitHub 更新 GitHub 文件
-    updateCompetitionOnGitHub(competitions);
-}
+// 加载初始数据
+window.onload = loadCompetitions;
