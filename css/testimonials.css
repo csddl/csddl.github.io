@@ -12,7 +12,7 @@
     position: absolute;
     left: 50%;
     top: 0;
-    width: 4px;
+    width: 2px;
     height: 100%;
     background-color: #ddd;
     transform: translateX(-50%);
@@ -22,8 +22,9 @@
 .timeline-entry {
     position: relative;
     width: 50%;
-    padding: 20px;
+    padding: 10px 20px;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
 /* 左右两侧条目 */
@@ -43,12 +44,12 @@
     position: absolute;
     top: 15px;
     right: -8px;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     background-color: #333;
     border: 3px solid #fff;
-    box-shadow: 0 0 0 3px rgba(51, 51, 51, 0.2);
+    box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.2);
 }
 
 .timeline-entry.right::before {
@@ -56,25 +57,18 @@
     right: auto;
 }
 
-/* 卡片样式 */
-.timeline-entry .card {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* 卡片标题 */
+/* 去掉 card 的边框和背景 */
 .timeline-entry h4 {
-    font-size: 18px;
-    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 0 5px 0;
 }
 
-/* 时间轴条目的内容 */
 .timeline-entry p {
     margin: 0;
-    font-size: 16px;
+    font-size: 14px;
     color: #666;
+    line-height: 1.6;
 }
 
 /* 响应式布局：小屏幕 */
