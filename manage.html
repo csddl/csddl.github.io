@@ -26,54 +26,22 @@
 
     <!-- 引入处理竞赛数据的 JavaScript -->
     <script>
-        const competitionData = [
-            {
-                "name": "USENIX Security 2025",
-                "category": "一类竞赛",
-                "signup_deadline": "2024-09-05T19:59:59",
-                "submission_deadline": "2024-09-15T23:59:59",
-                "level": "国赛",
-                "params_file": "https://example.com/params-file-usenix.pdf",
-                "recommendation": 4.5,
-                "website": "https://www.usenix.org/conference/usenixsecurity25",
-                "remarks": "参赛需提供团队详细背景介绍。"
-            },
-            {
-                "name": "MobiCom 2025",
-                "category": "二类竞赛",
-                "signup_deadline": "2024-10-01T23:59:59",
-                "submission_deadline": "2024-10-15T23:59:59",
-                "level": "省赛",
-                "params_file": "https://example.com/params-file-mobicom.pdf",
-                "recommendation": 4.2,
-                "website": "https://sigmobile.org/mobicom/2025/",
-                "remarks": "需要提前提交参赛项目的原型展示。"
-            },
-            {
-                "name": "AI Challenge 2025",
-                "category": "一类竞赛",
-                "signup_deadline": "2024-11-01T23:59:59",
-                "submission_deadline": "2024-11-30T23:59:59",
-                "level": "国赛",
-                "params_file": "https://example.com/params-file-ai.pdf",
-                "recommendation": 4.8,
-                "website": "https://www.aichallenge.org/2025/",
-                "remarks": "鼓励跨领域团队合作。"
-            }
-        ];
+        // 通过fetch API 从外部JSON文件中加载数据
+        fetch('data/competitions.json')
+            .then(response => response.json())
+            .then(data => {
+                // 默认填充第一个竞赛数据
+                populateForm(data, 0);
+            })
+            .catch(error => console.error('加载竞赛数据时出错:', error));
 
-        // 你可以在这里动态地使用竞赛数据来填充表单
-        function populateForm(index) {
-            const competition = competitionData[index];
+        // 动态填充表单
+        function populateForm(data, index) {
+            const competition = data[index];
             document.getElementById('competition-name').value = competition.name;
             document.getElementById('competition-category').value = competition.category;
             document.getElementById('competition-date').value = competition.signup_deadline.split('T')[0]; // 取日期部分
         }
-
-        // 在页面加载后可以调用函数
-        window.onload = function() {
-            populateForm(0); // 默认填充第一个竞赛数据
-        };
     </script>
 
 </body>
