@@ -5,7 +5,7 @@ function encodeToBase64(str) {
 
 // 更新竞赛文件的函数
 async function updateCompetitionOnGitHub(newCompetitionData) {
-    const token = 'your_personal_access_token';  // 使用你生成的新 GitHub Token
+    const token = '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';  // 使用你生成的新 GitHub Token
     const filePath = 'data/competitions.json';  // 文件路径
     const owner = 'csddl';  // 你的 GitHub 用户名
     const repo = 'csddl.github.io';  // 你的 GitHub 仓库名称
