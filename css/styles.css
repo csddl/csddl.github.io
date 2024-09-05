@@ -92,61 +92,6 @@ p {
     margin: 8px 0;
 }
 
-/* 时间轴容器 */
-#timeline {
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px 0;
-}
-
-/* 时间轴线 */
-#timeline::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 0;
-    width: 2px;
-    height: 100%;
-    background-color: #ddd;
-}
-
-/* 每个条目 */
-.timeline-entry {
-    position: relative;
-    width: 50%;
-    padding: 10px 20px;
-    box-sizing: border-box;
-}
-
-/* 左右两侧条目 */
-.timeline-entry.left {
-    left: 0;
-    text-align: right;
-}
-
-.timeline-entry.right {
-    left: 50%;
-    text-align: left;
-}
-
-/* 时间轴的点 */
-.timeline-entry::before {
-    content: '';
-    position: absolute;
-    top: 15px;
-    right: -8px;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background-color: #333;
-}
-
-.timeline-entry.right::before {
-    left: -8px;
-    right: auto;
-}
-
 /* 响应式布局：中等屏幕 */
 @media (max-width: 1440px) {
     .card, .green-card, .red-card {
@@ -158,20 +103,5 @@ p {
 @media (max-width: 768px) {
     .card, .green-card, .red-card {
         flex: 1 1 100%; /* 小屏幕每行显示 1 个卡片 */
-    }
-
-    /* 时间轴小屏幕显示效果 */
-    .timeline-entry {
-        width: 100%;
-        left: 0;
-        text-align: left;
-    }
-
-    .timeline-entry.left, .timeline-entry.right {
-        left: 0;
-    }
-
-    #timeline::before {
-        left: 20px;
     }
 }
