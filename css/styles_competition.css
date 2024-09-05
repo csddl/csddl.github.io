@@ -1,0 +1,26 @@
+/* 竞赛信息的卡片样式 */
+.card {
+    flex: 1 1 calc(33.333% - 20px); /* 每行最多显示 3 个卡片 */
+    min-width: 250px;
+    max-width: 400px;
+    min-height: 200px; /* 确保所有卡片有统一的最小高度 */
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.02); /* 悬停时放大卡片 */
+}
+
+h3 {
+    font-size: 18px;
+    margin: 0 0 10px 0;
+}
+
+p {
+    margin: 5px 0;
+}
