@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>管理页面</title>
-    <link rel="stylesheet" href="css/manage.css">  <!-- 引入manage.css -->
+    <link rel="stylesheet" href="css/manage.css">  <!-- 引入CSS -->
 </head>
 <body>
 
@@ -40,7 +40,7 @@
 
     <!-- 引入crypto API 和 登录与更新的 JavaScript -->
     <script>
-        const salt = '409';  // 固定盐值
+        const salt = '7g4k3f9m8h1j5';  // 固定盐值
 
         async function hashPassword(password) {
             const encoder = new TextEncoder();
@@ -56,14 +56,16 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            // 将用户输入的密码和盐值进行哈希处理
+            // 将用户输入的用户名和密码分别加盐哈希处理
+            const hashedUsername = await hashPassword(username);
             const hashedPassword = await hashPassword(password);
 
-            // 用于比对的哈希密码（在实际应用中应该存储在数据库中）
-            const storedHashedPassword = 'sha256_hash_of_admin_password_plus_salt_409';  // 需要替换为真实的已加盐和哈希后的密码
+            // 预先计算的哈希值
+            const storedHashedUsername = 'eb3cf669a2342b5dc30d918cb6f11de90ee3d49f66f542cae7b5709cfa1ec344';
+            const storedHashedPassword = '07cb9818635bd665af5f53b99cea2b8e7bf63dbdc1e82321da0752f65815aebe';
 
             // 简单的登录验证逻辑
-            if (username === 'admin' && hashedPassword === storedHashedPassword) {
+            if (hashedUsername === storedHashedUsername && hashedPassword === storedHashedPassword) {
                 alert('登录成功');
                 document.getElementById('login-section').style.display = 'none';
                 document.getElementById('update-section').style.display = 'block';
