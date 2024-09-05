@@ -21,7 +21,7 @@ nav ul {
     padding: 0;
     margin: 0;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start; /* 导航项靠左对齐 */
 }
 
 nav ul li {
@@ -40,6 +40,11 @@ nav ul li a {
 
 nav ul li a:hover, nav ul li a.active {
     background-color: #575757;
+}
+
+/* 保证 Update 按钮在导航栏的最右边 */
+nav ul li:last-child {
+    margin-left: auto; /* 将最后一个元素（Update 按钮）推到最右边 */
 }
 
 .section {
