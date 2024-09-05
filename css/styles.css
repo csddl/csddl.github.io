@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
-    background-color: #f5f5f5; /* 背景色，使卡片更加突出 */
+    background-color: #f5f5f5; /* 设置背景色，突出卡片 */
 }
 
 /* 导航栏样式 */
@@ -50,16 +50,16 @@ nav ul li a:hover, nav ul li a.active {
 .list-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    justify-content: space-evenly; /* 保证卡片在容器内均匀分布 */
+    gap: 30px; /* 增加卡片之间的间距 */
+    justify-content: space-evenly; /* 确保卡片间距均匀 */
 }
 
 /* 卡片样式 */
 .card, .green-card, .red-card {
-    flex: 1 1 calc(33.333% - 40px); /* 每行最多显示 3 个卡片 */
-    min-width: 250px;
-    max-width: 350px; /* 控制卡片的最大宽度 */
-    min-height: 250px; /* 设置统一的最小高度 */
+    flex: 1 1 calc(25% - 40px); /* 控制每行显示 4 个卡片 */
+    min-width: 280px; /* 增大卡片的最小宽度 */
+    max-width: 350px; /* 设置卡片的最大宽度 */
+    min-height: 260px; /* 设置统一的最小高度，提升卡片观感 */
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -93,9 +93,9 @@ p {
 }
 
 /* 响应式布局：中等屏幕 */
-@media (max-width: 1024px) {
+@media (max-width: 1440px) {
     .card, .green-card, .red-card {
-        flex: 1 1 calc(50% - 40px); /* 每行显示 2 个卡片 */
+        flex: 1 1 calc(33.333% - 40px); /* 中等屏幕每行显示 3 个卡片 */
     }
 }
 
