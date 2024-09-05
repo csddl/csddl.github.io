@@ -66,4 +66,24 @@ nav ul li a:hover, nav ul li a.active {
 }
 
 .card:hover {
-    transform: scale(1.02); /* 卡片
+    transform: scale(1.02); /* 卡片悬停效果 */
+}
+
+/* 五角星样式 */
+.stars {
+    color: gold; /* 星星的颜色 */
+    font-size: 1.2em;
+}
+
+/* 红黑榜卡片样式 */
+.green-card {
+    background-color: #e0ffe0;
+    padding: 10px;
+    margin: 10px;
+}
+
+.red-card {
+    background-color: #ffe0e0;
+    padding: 10px;
+    margin: 10px;
+}
