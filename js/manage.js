@@ -65,15 +65,15 @@ document.getElementById('competitionForm').addEventListener('submit', function(e
         competitions.push(updatedCompetition);
     }
 
-    updateCompetitionOnGitHub(competitions);  // 更新到GitHub
     displayCompetitionList();
+    updateCompetitionOnGitHub(competitions);  // 保存到GitHub
 });
 
 // 删除竞赛
 function deleteCompetition(index) {
     competitions.splice(index, 1);
-    updateCompetitionOnGitHub(competitions);  // 删除后更新到GitHub
     displayCompetitionList();
+    updateCompetitionOnGitHub(competitions);  // 删除后保存到GitHub
 }
 
 // 详情查看
