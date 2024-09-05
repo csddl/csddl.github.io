@@ -7,7 +7,8 @@
     "level": "国赛",
     "params_file": "https://example.com/params-file-usenix.pdf",
     "recommendation": 4.5,
-    "website": "https://www.usenix.org/conference/usenixsecurity25"
+    "website": "https://www.usenix.org/conference/usenixsecurity25",
+    "remarks": "参赛需提供团队详细背景介绍。"
   },
   {
     "name": "MobiCom 2025",
@@ -17,6 +18,18 @@
     "level": "省赛",
     "params_file": "https://example.com/params-file-mobicom.pdf",
     "recommendation": 4.2,
-    "website": "https://sigmobile.org/mobicom/2025/"
+    "website": "https://sigmobile.org/mobicom/2025/",
+    "remarks": "需要提前提交参赛项目的原型展示。"
+  },
+  {
+    "name": "AI Challenge 2025",
+    "category": "一类竞赛",
+    "signup_deadline": "2024-11-01T23:59:59",
+    "submission_deadline": "2024-11-30T23:59:59",
+    "level": "国赛",
+    "params_file": "https://example.com/params-file-ai.pdf",
+    "recommendation": 4.8,
+    "website": "https://www.aichallenge.org/2025/",
+    "remarks": "鼓励跨领域团队合作。"
   }
 ]
