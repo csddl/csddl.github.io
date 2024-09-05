@@ -19,7 +19,6 @@
 
     <!-- 内容部分 -->
     <div id="competition-section" class="section">
-        <h1>竞赛信息</h1>
         <div id="competition-list"></div>
     </div>
 
@@ -51,6 +50,12 @@
             document.querySelector(`#nav-${sectionId.split('-')[0]}`).classList.add('active');
         }
 
+        // 确保日期能够正确格式化
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return isNaN(date) ? '无效日期' : date.toLocaleString();
+        }
+
         // 加载竞赛信息
         fetch('data/competitions.json')
             .then(response => response.json())
@@ -61,12 +66,12 @@
                     competitionCard.classList.add('card');
                     competitionCard.innerHTML = `
                         <h3>${competition.name}</h3>
-                        <p>类别: ${competition.category}</p>
-                        <p>报名截止日期: ${new Date(competition.signup_deadline).toLocaleString()}</p>
-                        <p>提交作品截止日期: ${new Date(competition.submission_deadline).toLocaleString()}</p>
-                        <p>级别: ${competition.level}</p>
-                        <p><a href="${competition.params_file}" target="_blank">下载参数文件</a></p>
-                        <p>推荐指数: ${competition.recommendation}/5</p>
+                        <p>类别: ${competition.category || '未定义'}</p>
+                        <p>报名截止日期: ${formatDate(competition.signup_deadline)}</p>
+                        <p>提交作品截止日期: ${formatDate(competition.submission_deadline)}</p>
+                        <p>级别: ${competition.level || '未定义'}</p>
+                        <p><a href="${competition.params_file}" target="_blank">下载参赛文件</a></p>
+                        <p>推荐指数: ${competition.recommendation || '未定义'}/5</p>
                         <p><a href="${competition.website}" target="_blank">查看详情</a></p>
                     `;
                     competitionList.appendChild(competitionCard);
