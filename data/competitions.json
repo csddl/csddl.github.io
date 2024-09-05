@@ -1,14 +1,22 @@
 [
   {
     "name": "USENIX Security 2025",
-    "deadline": "2025-08-13T23:59:59",
-    "location": "SEATTLE, WA, USA",
+    "category": "一类竞赛",
+    "signup_deadline": "2024-09-05T19:59:59",
+    "submission_deadline": "2024-09-15T23:59:59",
+    "level": "国赛",
+    "params_file": "https://example.com/params-file-usenix.pdf",
+    "recommendation": 4.5,
     "website": "https://www.usenix.org/conference/usenixsecurity25"
   },
   {
     "name": "MobiCom 2025",
-    "deadline": "2025-11-01T23:59:59",
-    "location": "Hong Kong, China",
+    "category": "二类竞赛",
+    "signup_deadline": "2024-10-01T23:59:59",
+    "submission_deadline": "2024-10-15T23:59:59",
+    "level": "省赛",
+    "params_file": "https://example.com/params-file-mobicom.pdf",
+    "recommendation": 4.2,
     "website": "https://sigmobile.org/mobicom/2025/"
   }
 ]
