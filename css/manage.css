@@ -3,14 +3,14 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f5; /* 设置背景色，增加页面层次感 */
-    height: 100vh; /* 保证页面高度占满视窗 */
+    background-color: #f5f7fa; /* 浅灰色背景 */
+    height: 100vh; /* 确保页面高度占满视窗 */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* 登录和更新容器的通用样式 */
+/* 表单容器居中 */
 .section {
     display: flex;
     justify-content: center;
@@ -18,13 +18,14 @@ body {
     width: 100%;
 }
 
-.login-container, .update-container {
-    background-color: #fff;
+.update-container {
+    background-color: white;
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* 添加阴影 */
     max-width: 400px;
     width: 100%;
+    text-align: center; /* 居中对齐 */
 }
 
 /* 标题样式 */
@@ -33,53 +34,53 @@ h2 {
     font-weight: bold;
     margin-bottom: 20px;
     color: #333;
-    text-align: center;
 }
 
-/* 输入框组样式 */
+/* 表单元素样式 */
 label {
-    display: block;
-    margin-bottom: 8px;
-    color: #666;
     font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+    display: block;
+    text-align: left;
 }
 
-input[type="text"], input[type="password"], input[type="date"] {
+input[type="text"], input[type="date"] {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
+    font-size: 14px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    font-size: 14px;
     box-sizing: border-box;
-    transition: border 0.3s ease;
-}
-
-input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus {
-    border-color: #4a90e2; /* 输入框聚焦时的边框颜色 */
+    margin-bottom: 20px;
     outline: none;
+    transition: border-color 0.3s ease;
 }
 
-/* 登录和更新按钮样式 */
+input[type="text"]:focus, input[type="date"]:focus {
+    border-color: #4a90e2;
+}
+
+/* 提交按钮样式 */
 button[type="submit"] {
     width: 100%;
-    background-color: #4a90e2; /* 按钮背景色 */
+    background-color: #4a90e2;
     color: white;
     padding: 12px;
-    font-size: 16px;
     border: none;
     border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 button[type="submit"]:hover {
-    background-color: #357ABD; /* 悬停时背景色变暗 */
+    background-color: #357ABD;
 }
 
 /* 响应式设计，适配小屏幕 */
 @media (max-width: 480px) {
-    .login-container, .update-container {
+    .update-container {
         padding: 20px;
         max-width: 90%;
     }
