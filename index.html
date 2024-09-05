@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-
     <!-- 导航栏 -->
     <nav>
         <ul id="navbar">
@@ -17,26 +16,24 @@
         </ul>
     </nav>
 
-    <!-- 竞赛信息部分 -->
+    <!-- 内容部分 -->
     <div id="competition-section" class="section">
-        <div id="competition-list" class="list-container"></div>
+        <div id="competition-list"></div>
     </div>
 
-    <!-- 选课红黑榜部分 -->
     <div id="courses-section" class="section" style="display: none;">
-        <div id="course-list" class="list-container"></div>
+        <div id="course-list"></div>
     </div>
 
-    <!-- 学长说部分 -->
+    <!-- 学长说 时间轴 -->
     <div id="testimonials-section" class="section" style="display: none;">
-        <div id="testimonial-list" class="list-container"></div>
+        <div class="timeline">
+            <div id="testimonial-list"></div>
+        </div>
     </div>
 
-    <!-- 引入外部 JavaScript 文件 -->
-    <script src="js/scripts_common.js"></script>  <!-- 通用的函数 -->
     <script src="js/scripts_competition.js"></script>
     <script src="js/scripts_courses.js"></script>
     <script src="js/scripts_testimonials.js"></script>
-
 </body>
 </html>
