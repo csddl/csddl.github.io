@@ -1,0 +1,88 @@
+/* 全局样式 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+/* 导航栏样式 */
+nav {
+    background-color: #333;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
+    display: block;
+    padding: 14px 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover, nav ul li a.active {
+    background-color: #575757;
+}
+
+.section {
+    padding-top: 60px;
+}
+
+/* Flexbox 布局，用于自适应卡片布局 */
+.list-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+/* 卡片样式 */
+.card, .green-card, .red-card {
+    flex: 1 1 calc(33.333% - 20px); /* 每行最多显示 3 个卡片 */
+    min-width: 250px;
+    max-width: 400px;
+    min-height: 200px; /* 确保所有卡片有统一的最小高度 */
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.green-card {
+    background-color: #e0ffe0; /* 绿色背景 */
+}
+
+.red-card {
+    background-color: #ffe0e0; /* 红色背景 */
+}
+
+.card:hover, .green-card:hover, .red-card:hover {
+    transform: scale(1.02); /* 悬停时放大卡片 */
+}
+
+h3 {
+    font-size: 18px;
+    margin: 0 0 10px 0;
+}
+
+p {
+    margin: 5px 0;
+}
