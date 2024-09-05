@@ -38,18 +38,32 @@
         </div>
     </div>
 
-    <!-- 登录和更新的 JavaScript -->
+    <!-- 引入crypto API 和 登录与更新的 JavaScript -->
     <script>
-        let isLoggedIn = false;
+        const salt = '409';  // 固定盐值
 
-        function handleLogin(event) {
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password + salt);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
+
+        async function handleLogin(event) {
             event.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
+            // 将用户输入的密码和盐值进行哈希处理
+            const hashedPassword = await hashPassword(password);
+
+            // 用于比对的哈希密码（在实际应用中应该存储在数据库中）
+            const storedHashedPassword = 'sha256_hash_of_admin_password_plus_salt_409';  // 需要替换为真实的已加盐和哈希后的密码
+
             // 简单的登录验证逻辑
-            if (username === 'admin' && password === 'password') {
-                isLoggedIn = true;
+            if (username === 'admin' && hashedPassword === storedHashedPassword) {
                 alert('登录成功');
                 document.getElementById('login-section').style.display = 'none';
                 document.getElementById('update-section').style.display = 'block';
