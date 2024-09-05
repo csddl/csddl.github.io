@@ -66,18 +66,4 @@ nav ul li a:hover, nav ul li a.active {
 }
 
 .card:hover {
-    transform: scale(1.02); /* 卡片悬停效果 */
-}
-
-/* 红黑榜卡片样式 */
-.green-card {
-    background-color: #e0ffe0;
-    padding: 10px;
-    margin: 10px;
-}
-
-.red-card {
-    background-color: #ffe0e0;
-    padding: 10px;
-    margin: 10px;
-}
+    transform: scale(1.02); /* 卡片
