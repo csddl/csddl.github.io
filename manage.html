@@ -1,70 +1,86 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>竞赛管理系统</title>
-    <link rel="stylesheet" href="css/manage.css"> <!-- 引入CSS样式 -->
-</head>
-<body>
+let competitions = [];
 
-    <!-- 登录部分 -->
-    <div id="login-section" class="section">
-        <div class="login-container">
-            <h2>请登录</h2>
-            <form id="loginForm" onsubmit="return handleLogin(event)">
-                <label for="username">用户名：</label>
-                <input type="text" id="username" name="username" required><br><br>
-                <label for="password">密码：</label>
-                <input type="password" id="password" name="password" required><br><br>
-                <button type="submit">登录</button>
-            </form>
-        </div>
-    </div>
+// 加载竞赛数据
+function loadCompetitions() {
+    fetch('data/competitions.json')
+        .then(response => response.json())
+        .then(data => {
+            competitions = data;
+            displayCompetitionList();
+        })
+        .catch(error => console.error('加载竞赛数据时出错:', error));
+}
 
-    <!-- 管理部分 -->
-    <div id="manage-section" class="section" style="display:none;">
-        <h1>竞赛管理系统</h1>
-        
-        <!-- 竞赛信息表格 -->
-        <table class="competition-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>竞赛名称</th>
-                    <th>类别</th>
-                    <th>报名截止日期</th>
-                    <th>提交截止日期</th>
-                    <th>状态</th>
-                    <th>操作</th>
-                </tr>
-            </thead>
-            <tbody id="competition-list">
-                <!-- 动态加载竞赛数据 -->
-            </tbody>
-        </table>
+// 显示竞赛列表
+function displayCompetitionList() {
+    const competitionList = document.getElementById('competition-list');
+    competitionList.innerHTML = ''; // 清空列表
 
-        <!-- 添加和编辑竞赛表单 -->
-        <div class="form-container">
-            <form id="competitionForm">
-                <input type="hidden" id="competition-id">
-                <label for="competition-name">竞赛名称：</label>
-                <input type="text" id="competition-name" name="competition-name" required><br><br>
-                <label for="competition-category">类别：</label>
-                <input type="text" id="competition-category" name="competition-category" required><br><br>
-                <label for="competition-signup">报名截止日期：</label>
-                <input type="date" id="competition-signup" name="competition-signup" required><br><br>
-                <label for="competition-submission">提交截止日期：</label>
-                <input type="date" id="competition-submission" name="competition-submission" required><br><br>
-                <button type="submit">保存竞赛信息</button>
-            </form>
-        </div>
-    </div>
+    competitions.forEach((competition, index) => {
+        const row = document.createElement('tr');
 
-    <!-- 引入外部 JavaScript 文件 -->
-    <script src="js/login.js"></script>
-    <script src="js/manage.js"></script>
-    <script src="js/competitions_update.js"></script>
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${competition.name}</td>
+            <td>${competition.category}</td>
+            <td>${competition.signup_deadline.split('T')[0]}</td>
+            <td>${competition.submission_deadline.split('T')[0]}</td>
+            <td>${competition.status || '未生效'}</td>
+            <td>
+                <button class="details-btn" onclick="viewDetails(${index})">详情</button>
+                <button class="edit-btn" onclick="editCompetition(${index})">编辑</button>
+                <button class="delete-btn" onclick="deleteCompetition(${index})">删除</button>
+            </td>
+        `;
 
-</body>
-</html>
+        competitionList.appendChild(row);
+    });
+}
+
+// 编辑竞赛
+function editCompetition(index) {
+    const competition = competitions[index];
+    document.getElementById('competition-id').value = index;
+    document.getElementById('competition-name').value = competition.name;
+    document.getElementById('competition-category').value = competition.category;
+    document.getElementById('competition-signup').value = competition.signup_deadline.split('T')[0];
+    document.getElementById('competition-submission').value = competition.submission_deadline.split('T')[0];
+}
+
+// 保存竞赛信息
+document.getElementById('competitionForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const id = document.getElementById('competition-id').value;
+
+    const updatedCompetition = {
+        name: document.getElementById('competition-name').value,
+        category: document.getElementById('competition-category').value,
+        signup_deadline: document.getElementById('competition-signup').value + 'T23:59:59',
+        submission_deadline: document.getElementById('competition-submission').value + 'T23:59:59'
+    };
+
+    if (id) {
+        competitions[id] = updatedCompetition;
+    } else {
+        competitions.push(updatedCompetition);
+    }
+
+    displayCompetitionList();
+    updateCompetitionOnGitHub(competitions);  // 保存到GitHub
+});
+
+// 删除竞赛
+function deleteCompetition(index) {
+    competitions.splice(index, 1);
+    displayCompetitionList();
+    updateCompetitionOnGitHub(competitions);  // 删除后保存到GitHub
+}
+
+// 详情查看
+function viewDetails(index) {
+    const competition = competitions[index];
+    alert(`竞赛名称: ${competition.name}\n类别: ${competition.category}`);
+}
+
+// 加载初始数据
+window.onload = loadCompetitions;
