@@ -4,50 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>竞赛管理系统</title>
-    <link rel="stylesheet" href="css/manage.css"> <!-- 引入新的CSS样式 -->
+    <link rel="stylesheet" href="css/manage.css"> <!-- 引入CSS样式 -->
 </head>
 <body>
 
-    <!-- 侧边栏 -->
-    <aside class="sidebar">
-        <h2>竞赛管理系统</h2>
-        <ul>
-            <li><a href="#" class="active">管理竞赛信息</a></li>
-            <li><a href="#">竞赛列表</a></li>
-            <li><a href="#">用户管理</a></li>
-            <li><a href="#">权限管理</a></li>
-        </ul>
-        <button class="logout-btn">退出登录</button>
-    </aside>
-
-    <!-- 主要内容区 -->
-    <main class="main-content">
-        <h1>管理竞赛信息</h1>
-
-        <div class="form-container">
-            <form id="updateForm">
-                <label for="competition-name">竞赛名称：</label>
-                <input type="text" id="competition-name" name="competition-name" required>
-
-                <label for="competition-category">类别：</label>
-                <input type="text" id="competition-category" name="competition-category" required>
-
-                <label for="competition-date">截止日期：</label>
-                <input type="date" id="competition-date" name="competition-date" required>
-
-                <div class="button-group">
-                    <button type="button" class="btn-update" onclick="updateCompetition()">更新信息</button>
-                    <button type="button" class="btn-add" onclick="addCompetition()">添加竞赛</button>
-                    <button type="button" class="btn-delete" onclick="deleteCompetition()">删除竞赛</button>
-                </div>
+    <!-- 登录部分 -->
+    <div id="login-section" class="section">
+        <div class="login-container">
+            <h2>请登录</h2>
+            <form id="loginForm" onsubmit="return handleLogin(event)">
+                <label for="username">用户名：</label>
+                <input type="text" id="username" name="username" required><br><br>
+                <label for="password">密码：</label>
+                <input type="password" id="password" name="password" required><br><br>
+                <button type="submit">登录</button>
             </form>
         </div>
+    </div>
 
-        <div class="competition-list-section">
-            <h2>当前竞赛信息列表</h2>
-            <ul id="competition-list"></ul> <!-- 动态展示竞赛列表 -->
+    <!-- 管理部分 -->
+    <div id="manage-section" class="section" style="display:none;">
+        <h1>竞赛管理系统</h1>
+        
+        <!-- 竞赛信息表格 -->
+        <table class="competition-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>竞赛名称</th>
+                    <th>类别</th>
+                    <th>报名截止日期</th>
+                    <th>提交截止日期</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="competition-list">
+                <!-- 动态加载竞赛数据 -->
+            </tbody>
+        </table>
+
+        <!-- 添加和编辑竞赛表单 -->
+        <div class="form-container">
+            <form id="competitionForm">
+                <input type="hidden" id="competition-id">
+                <label for="competition-name">竞赛名称：</label>
+                <input type="text" id="competition-name" name="competition-name" required><br><br>
+                <label for="competition-category">类别：</label>
+                <input type="text" id="competition-category" name="competition-category" required><br><br>
+                <label for="competition-signup">报名截止日期：</label>
+                <input type="date" id="competition-signup" name="competition-signup" required><br><br>
+                <label for="competition-submission">提交截止日期：</label>
+                <input type="date" id="competition-submission" name="competition-submission" required><br><br>
+                <button type="submit">保存竞赛信息</button>
+            </form>
         </div>
-    </main>
+    </div>
 
     <!-- 引入外部 JavaScript 文件 -->
     <script src="js/login.js"></script>
