@@ -8,10 +8,8 @@ fetch('data/testimonials.json')
             const testimonialEntry = document.createElement('div');
             testimonialEntry.classList.add('timeline-entry', position);
             testimonialEntry.innerHTML = `
-                <div class="card">
-                    <h4>${testimonial.author} - ${new Date(testimonial.time).toLocaleDateString()}</h4>
-                    <p>${testimonial.content}</p>
-                </div>
+                <h4>${testimonial.author} - ${new Date(testimonial.time).toLocaleDateString()}</h4>
+                <p>${testimonial.content}</p>
             `;
             timeline.appendChild(testimonialEntry);
         });
