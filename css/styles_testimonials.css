@@ -1,26 +1,21 @@
-/* 学长说部分的卡片样式 */
-.card {
-    flex: 1 1 calc(33.333% - 20px); /* 每行最多显示 3 个卡片 */
-    min-width: 250px;
-    max-width: 400px;
-    min-height: 150px; /* 确保所有卡片有统一的最小高度 */
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-}
+// 加载学长说信息并按时间倒序排列
+fetch('data/testimonials.json')
+    .then(response => response.json())
+    .then(data => {
+        const timeline = document.getElementById('timeline');
 
-.card:hover {
-    transform: scale(1.02); /* 悬停时放大卡片 */
-}
+        // 按时间倒序排列
+        data.sort((a, b) => new Date(b.time) - new Date(a.time));
 
-h4 {
-    font-size: 16px;
-    margin: 0 0 8px 0;
-}
+        // 创建时间轴条目
+        data.forEach((testimonial, index) => {
+            const entry = document.createElement('div');
+            entry.classList.add('timeline-entry', index % 2 === 0 ? 'left' : 'right'); // 左右交替
 
-p {
-    margin: 5px 0;
-}
+            entry.innerHTML = `
+                <h4>${testimonial.author} - ${new Date(testimonial.time).toLocaleDateString()}</h4>
+                <p>${testimonial.content}</p>
+            `;
+            timeline.appendChild(entry);
+        });
+    });
