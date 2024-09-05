@@ -4,7 +4,7 @@ body {
     margin: 20px;
 }
 
-/* 导航栏 */
+/* 导航栏样式 */
 nav {
     background-color: #333;
     position: fixed;
@@ -44,24 +44,40 @@ nav ul li a:hover, nav ul li a.active {
     padding-top: 60px;
 }
 
-/* Grid 容器样式 */
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 自动调整列数 */
+/* Flexbox 布局，用于自适应卡片布局 */
+#competition-list {
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
-    padding: 20px;
+    justify-content: space-between;
 }
 
-/* 卡片样式 */
 .card {
-    background-color: #fff;
+    flex: 1 1 calc(33.333% - 20px); /* 每行最多显示 3 个卡片 */
+    min-width: 250px; /* 最小宽度 */
+    max-width: 400px; /* 最大宽度 */
+    padding: 15px;
+    margin: 15px 0;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 20px;
     transition: transform 0.2s;
 }
 
 .card:hover {
-    transform: scale(1.05); /* 悬停效果 */
+    transform: scale(1.02); /* 卡片悬停效果 */
+}
+
+/* 红黑榜卡片样式 */
+.green-card {
+    background-color: #e0ffe0;
+    padding: 10px;
+    margin: 10px;
+}
+
+.red-card {
+    background-color: #ffe0e0;
+    padding: 10px;
+    margin: 10px;
 }
