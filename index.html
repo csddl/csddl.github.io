@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>竞赛信息、选课红黑榜和学长说</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <h1>竞赛信息</h1>
+    <div id="competition-list"></div>
+
+    <h1>选课红黑榜</h1>
+    <div id="course-list"></div>
+
+    <h1>学长说</h1>
+    <div id="testimonial-list"></div>
+
+    <script>
+        // 加载竞赛信息
+        fetch('data/competitions.json')
+            .then(response => response.json())
+            .then(data => {
+                const competitionList = document.getElementById('competition-list');
+                data.forEach(competition => {
+                    const competitionCard = document.createElement('div');
+                    competitionCard.classList.add('card');
+                    competitionCard.innerHTML = `
+                        <h3>${competition.name}</h3>
+                        <p>截止日期: ${new Date(competition.deadline).toLocaleString()}</p>
+                        <p>地点: ${competition.location}</p>
+                        <a href="${competition.website}" target="_blank">查看详情</a>
+                    `;
+                    competitionList.appendChild(competitionCard);
+                });
+            });
+
+        // 加载选课红黑榜
+        fetch('data/courses.json')
+            .then(response => response.json())
+            .then(data => {
+                const courseList = document.getElementById('course-list');
+                data.forEach(course => {
+                    const courseCard = document.createElement('div');
+                    courseCard.classList.add(course.rating === "红榜" ? 'green-card' : 'red-card');
+                    courseCard.innerHTML = `
+                        <h3>${course.name}</h3>
+                        <p>${course.rating}：${course.comment}</p>
+                        <p>学期：${course.semester}</p>
+                    `;
+                    courseList.appendChild(courseCard);
+                });
+            });
+
+        // 加载学长说
+        fetch('data/testimonials.json')
+            .then(response => response.json())
+            .then(data => {
+                const testimonialList = document.getElementById('testimonial-list');
+                data.sort((a, b) => new Date(b.time) - new Date(a.time));  // 按时间倒序排列
+                data.forEach(testimonial => {
+                    const testimonialCard = document.createElement('div');
+                    testimonialCard.classList.add('card');
+                    testimonialCard.innerHTML = `
+                        <h4>${testimonial.author} - ${new Date(testimonial.time).toLocaleDateString()}</h4>
+                        <p>${testimonial.content}</p>
+                    `;
+                    testimonialList.appendChild(testimonialCard);
+                });
+            });
+    </script>
+
+</body>
+</html>
