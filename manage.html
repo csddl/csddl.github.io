@@ -3,47 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>管理页面</title>
-    <link rel="stylesheet" href="css/manage.css"> <!-- 引入CSS -->
+    <title>竞赛管理系统</title>
+    <link rel="stylesheet" href="css/manage.css"> <!-- 引入新的CSS样式 -->
 </head>
 <body>
 
-    <!-- 登录部分 -->
-    <div id="login-section" class="section">
-        <div class="login-container">
-            <h2>请登录</h2>
-            <form id="loginForm" onsubmit="return handleLogin(event)">
-                <label for="username">用户名：</label>
-                <input type="text" id="username" name="username" required><br><br>
-                <label for="password">密码：</label>
-                <input type="password" id="password" name="password" required><br><br>
-                <button type="submit">登录</button>
-            </form>
-        </div>
-    </div>
+    <!-- 侧边栏 -->
+    <aside class="sidebar">
+        <h2>竞赛管理系统</h2>
+        <ul>
+            <li><a href="#" class="active">管理竞赛信息</a></li>
+            <li><a href="#">竞赛列表</a></li>
+            <li><a href="#">用户管理</a></li>
+            <li><a href="#">权限管理</a></li>
+        </ul>
+        <button class="logout-btn">退出登录</button>
+    </aside>
 
-    <!-- 更新竞赛信息部分，登录后显示 -->
-    <div id="update-section" class="section" style="display:none;">
-        <div class="update-container">
-            <h2>管理竞赛信息</h2>
+    <!-- 主要内容区 -->
+    <main class="main-content">
+        <h1>管理竞赛信息</h1>
+
+        <div class="form-container">
             <form id="updateForm">
                 <label for="competition-name">竞赛名称：</label>
-                <input type="text" id="competition-name" name="competition-name" required><br><br>
+                <input type="text" id="competition-name" name="competition-name" required>
+
                 <label for="competition-category">类别：</label>
-                <input type="text" id="competition-category" name="competition-category" required><br><br>
+                <input type="text" id="competition-category" name="competition-category" required>
+
                 <label for="competition-date">截止日期：</label>
-                <input type="date" id="competition-date" name="competition-date" required><br><br>
-                <button type="button" onclick="updateCompetition()">更新信息</button>
-                <button type="button" onclick="addCompetition()">添加竞赛</button>
-                <button type="button" onclick="deleteCompetition()">删除竞赛</button>
+                <input type="date" id="competition-date" name="competition-date" required>
+
+                <div class="button-group">
+                    <button type="button" class="btn-update" onclick="updateCompetition()">更新信息</button>
+                    <button type="button" class="btn-add" onclick="addCompetition()">添加竞赛</button>
+                    <button type="button" class="btn-delete" onclick="deleteCompetition()">删除竞赛</button>
+                </div>
             </form>
         </div>
-    </div>
 
-    <div class="competition-list-section" style="display:none;">
-        <h2>当前竞赛信息列表</h2>
-        <ul id="competition-list"></ul> <!-- 动态展示竞赛列表 -->
-    </div>
+        <div class="competition-list-section">
+            <h2>当前竞赛信息列表</h2>
+            <ul id="competition-list"></ul> <!-- 动态展示竞赛列表 -->
+        </div>
+    </main>
 
     <!-- 引入外部 JavaScript 文件 -->
     <script src="js/login.js"></script>
