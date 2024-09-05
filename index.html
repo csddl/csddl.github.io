@@ -61,9 +61,13 @@
                     competitionCard.classList.add('card');
                     competitionCard.innerHTML = `
                         <h3>${competition.name}</h3>
-                        <p>截止日期: ${new Date(competition.deadline).toLocaleString()}</p>
-                        <p>地点: ${competition.location}</p>
-                        <a href="${competition.website}" target="_blank">查看详情</a>
+                        <p>类别: ${competition.category}</p>
+                        <p>报名截止日期: ${new Date(competition.signup_deadline).toLocaleString()}</p>
+                        <p>提交作品截止日期: ${new Date(competition.submission_deadline).toLocaleString()}</p>
+                        <p>级别: ${competition.level}</p>
+                        <p><a href="${competition.params_file}" target="_blank">下载参数文件</a></p>
+                        <p>推荐指数: ${competition.recommendation}/5</p>
+                        <p><a href="${competition.website}" target="_blank">查看详情</a></p>
                     `;
                     competitionList.appendChild(competitionCard);
                 });
