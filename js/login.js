@@ -24,8 +24,7 @@ async function handleLogin(event) {
     if (hashedUsername === storedHashedUsername && hashedPassword === storedHashedPassword) {
         alert('登录成功');
         document.getElementById('login-section').style.display = 'none';
-        document.getElementById('update-section').style.display = 'block';
-        document.querySelector('.competition-list-section').style.display = 'block';
+        document.getElementById('manage-section').style.display = 'block';
         loadCompetitions();  // 调用manage.js中的函数加载竞赛信息
     } else {
         alert('用户名或密码错误');
