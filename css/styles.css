@@ -3,10 +3,43 @@ body {
     margin: 20px;
 }
 
-h1 {
-    text-align: center;
-    color: #333;
-    margin-top: 40px;
+nav {
+    background-color: #333;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
+    display: block;
+    padding: 14px 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover, nav ul li a.active {
+    background-color: #575757;
+}
+
+.section {
+    padding-top: 60px;  /* 用于避免内容被导航栏遮挡 */
 }
 
 .card {
