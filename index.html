@@ -3,21 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>竞赛信息、选课红黑榜和学长说</title>
+    <title>cs-ddl</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-    <h1>竞赛信息</h1>
-    <div id="competition-list"></div>
+    <!-- 导航栏 -->
+    <nav>
+        <ul id="navbar">
+            <li><a href="#" id="nav-competition" class="active" onclick="showSection('competition-section')">竞赛信息</a></li>
+            <li><a href="#" id="nav-courses" onclick="showSection('courses-section')">选课红黑榜</a></li>
+            <li><a href="#" id="nav-testimonials" onclick="showSection('testimonials-section')">学长说</a></li>
+        </ul>
+    </nav>
 
-    <h1>选课红黑榜</h1>
-    <div id="course-list"></div>
+    <!-- 内容部分 -->
+    <div id="competition-section" class="section">
+        <h1>竞赛信息</h1>
+        <div id="competition-list"></div>
+    </div>
 
-    <h1>学长说</h1>
-    <div id="testimonial-list"></div>
+    <div id="courses-section" class="section" style="display: none;">
+        <h1>选课红黑榜</h1>
+        <div id="course-list"></div>
+    </div>
+
+    <div id="testimonials-section" class="section" style="display: none;">
+        <h1>学长说</h1>
+        <div id="testimonial-list"></div>
+    </div>
 
     <script>
+        // 导航栏点击切换显示的内容
+        function showSection(sectionId) {
+            // 隐藏所有 section
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // 显示选中的 section
+            document.getElementById(sectionId).style.display = 'block';
+
+            // 更新导航栏的选中状态
+            document.querySelectorAll('#navbar a').forEach(nav => {
+                nav.classList.remove('active');
+            });
+            document.querySelector(`#nav-${sectionId.split('-')[0]}`).classList.add('active');
+        }
+
         // 加载竞赛信息
         fetch('data/competitions.json')
             .then(response => response.json())
