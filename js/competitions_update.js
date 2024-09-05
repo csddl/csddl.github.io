@@ -1,5 +1,3 @@
-// 这个文件专门处理竞赛的增删改查操作以及更新 GitHub 中的 JSON 文件
-
 // 更新竞赛文件的函数
 async function updateCompetitionOnGitHub(newCompetitionData) {
     const token = 'your_new_personal_access_token';  // 使用你生成的新 GitHub Token
@@ -38,6 +36,3 @@ async function updateCompetitionOnGitHub(newCompetitionData) {
     const result = await updateResponse.json();
     console.log('文件已更新：', result);
 }
-
-// 示例：调用这个函数来更新或添加竞赛数据
-// 你可以通过 addCompetition 或 updateCompetition 来调用此函数并更新 GitHub 上的文件
