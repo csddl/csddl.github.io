@@ -11,7 +11,7 @@
     <!-- 更新竞赛信息部分，登录后显示 -->
     <div id="update-section" class="section">
         <div class="update-container">
-            <h2>更新竞赛信息</h2>
+            <h2>管理竞赛信息</h2>
             <form id="updateForm">
                 <label for="competition-name">竞赛名称：</label>
                 <input type="text" id="competition-name" name="competition-name" required><br><br>
@@ -19,29 +19,97 @@
                 <input type="text" id="competition-category" name="competition-category" required><br><br>
                 <label for="competition-date">截止日期：</label>
                 <input type="date" id="competition-date" name="competition-date" required><br><br>
-                <button type="submit">更新信息</button>
+                <button type="button" onclick="updateCompetition()">更新信息</button>
+                <button type="button" onclick="addCompetition()">添加竞赛</button>
+                <button type="button" onclick="deleteCompetition()">删除竞赛</button>
             </form>
         </div>
     </div>
 
+    <div class="competition-list-section">
+        <h2>当前竞赛信息列表</h2>
+        <ul id="competition-list"></ul> <!-- 动态展示竞赛列表 -->
+    </div>
+
     <!-- 引入处理竞赛数据的 JavaScript -->
     <script>
-        // 通过fetch API 从外部JSON文件中加载数据
+        let competitions = [];
+
+        // 加载竞赛数据
         fetch('data/competitions.json')
             .then(response => response.json())
             .then(data => {
-                // 默认填充第一个竞赛数据
-                populateForm(data, 0);
+                competitions = data;
+                populateCompetitionList(); // 显示所有竞赛信息
+                populateForm(0); // 默认填充第一个竞赛信息
             })
             .catch(error => console.error('加载竞赛数据时出错:', error));
 
         // 动态填充表单
-        function populateForm(data, index) {
-            const competition = data[index];
+        function populateForm(index) {
+            const competition = competitions[index];
             document.getElementById('competition-name').value = competition.name;
             document.getElementById('competition-category').value = competition.category;
             document.getElementById('competition-date').value = competition.signup_deadline.split('T')[0]; // 取日期部分
+            document.getElementById('updateForm').setAttribute('data-index', index); // 保存当前编辑的索引
         }
+
+        // 显示所有竞赛信息
+        function populateCompetitionList() {
+            const competitionList = document.getElementById('competition-list');
+            competitionList.innerHTML = ''; // 清空列表
+            competitions.forEach((competition, index) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = competition.name;
+                listItem.onclick = () => populateForm(index); // 点击列表项填充表单
+                competitionList.appendChild(listItem);
+            });
+        }
+
+        // 更新竞赛信息
+        function updateCompetition() {
+            const index = document.getElementById('updateForm').getAttribute('data-index');
+            competitions[index] = {
+                name: document.getElementById('competition-name').value,
+                category: document.getElementById('competition-category').value,
+                signup_deadline: document.getElementById('competition-date').value + 'T23:59:59', // 拼接时间部分
+                submission_deadline: competitions[index].submission_deadline,
+                level: competitions[index].level,
+                params_file: competitions[index].params_file,
+                recommendation: competitions[index].recommendation,
+                website: competitions[index].website,
+                remarks: competitions[index].remarks
+            };
+            populateCompetitionList(); // 更新列表显示
+            alert('竞赛信息已更新');
+        }
+
+        // 添加新的竞赛
+        function addCompetition() {
+            const newCompetition = {
+                name: document.getElementById('competition-name').value,
+                category: document.getElementById('competition-category').value,
+                signup_deadline: document.getElementById('competition-date').value + 'T23:59:59', // 拼接时间部分
+                submission_deadline: "2024-12-31T23:59:59", // 默认提交截止日期
+                level: "国赛", // 默认等级
+                params_file: "",
+                recommendation: 5.0,
+                website: "",
+                remarks: "新添加的竞赛"
+            };
+            competitions.push(newCompetition);
+            populateCompetitionList(); // 更新列表显示
+            alert('新竞赛已添加');
+        }
+
+        // 删除当前竞赛
+        function deleteCompetition() {
+            const index = document.getElementById('updateForm').getAttribute('data-index');
+            competitions.splice(index, 1); // 删除指定竞赛
+            populateCompetitionList(); // 更新列表显示
+            alert('竞赛已删除');
+        }
+
     </script>
 
 </body>
