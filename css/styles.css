@@ -44,8 +44,8 @@ nav ul li a:hover, nav ul li a.active {
     padding-top: 60px;
 }
 
-/* Flexbox 布局，用于自适应卡片布局 */
-#competition-list {
+/* 通用的网格布局 */
+.list-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
