@@ -48,20 +48,8 @@ function updateCompetition() {
         remarks: competitions[index].remarks
     };
 
-    // 发送 POST 请求到服务器
-    fetch('/updateCompetition', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(competitions), // 将修改后的竞赛数组发送给服务器
-    })
-    .then(response => response.text())
-    .then(message => {
-        alert(message); // 显示服务器返回的消息
-        populateCompetitionList(); // 更新列表显示
-    })
-    .catch(error => console.error('更新竞赛数据时出错:', error));
+    // 调用 updateCompetitionOnGitHub 更新 GitHub 上的文件
+    updateCompetitionOnGitHub(competitions);
 }
 
 // 添加新的竞赛
@@ -79,7 +67,9 @@ function addCompetition() {
     };
     competitions.push(newCompetition);
     populateCompetitionList(); // 更新列表显示
-    alert('新竞赛已添加');
+
+    // 调用 updateCompetitionOnGitHub 将新竞赛添加到 GitHub 文件
+    updateCompetitionOnGitHub(competitions);
 }
 
 // 删除当前竞赛
@@ -88,4 +78,7 @@ function deleteCompetition() {
     competitions.splice(index, 1); // 删除指定竞赛
     populateCompetitionList(); // 更新列表显示
     alert('竞赛已删除');
+
+    // 调用 updateCompetitionOnGitHub 更新 GitHub 文件
+    updateCompetitionOnGitHub(competitions);
 }
