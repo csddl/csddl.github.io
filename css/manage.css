@@ -1,83 +1,176 @@
 /* 全局样式 */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f4f8;
+    background-color: #f0f2f5;
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
+}
+
+/* 侧边栏样式 */
+.sidebar {
+    background-color: #343a40;
+    width: 250px;
     height: 100vh;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
-/* 登录部分样式 */
-.login-container {
-    background-color: white;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-}
-
-h2 {
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 20px;
-    font-weight: 600;
-}
-
-label {
-    display: block;
-    text-align: left;
-    margin-bottom: 8px;
-    color: #555;
-    font-size: 14px;
-    font-weight: 500;
-}
-
-input[type="text"],
-input[type="password"] {
-    width: 100%;
-    padding: 12px 15px;
-    margin-bottom: 20px;
-    border: 1px solid #d1d9e6;
-    border-radius: 6px;
-    font-size: 16px;
-    background-color: #f9fbfd;
-    transition: border-color 0.3s ease;
-}
-
-input[type="text"]:focus,
-input[type="password"]:focus {
-    border-color: #0056b3;
-    outline: none;
-}
-
-button {
-    width: 100%;
-    padding: 12px 20px;
-    background-color: #007bff;
+.sidebar h2 {
     color: white;
-    border: none;
-    border-radius: 6px;
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 20px;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
     font-size: 16px;
-    cursor: pointer;
+    display: block;
+    padding: 10px;
+    background-color: #495057;
+    border-radius: 5px;
+    text-align: center;
     transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #0056b3;
+.sidebar ul li a.active, .sidebar ul li a:hover {
+    background-color: #007bff;
 }
 
-/* 响应式布局：保证在小屏幕设备上显示良好 */
-@media (max-width: 768px) {
-    .login-container {
-        padding: 30px;
-    }
+.logout-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
 
-    button {
-        padding: 10px 16px;
-    }
+.logout-btn:hover {
+    background-color: #c82333;
+}
+
+/* 主要内容区 */
+.main-content {
+    flex-grow: 1;
+    padding: 40px;
+}
+
+.main-content h1 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.form-container label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    color: #555;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-group button {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.button-group button:last-child {
+    margin-right: 0;
+}
+
+.btn-update {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-add {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.button-group button:hover {
+    opacity: 0.9;
+}
+
+/* 列表样式 */
+.competition-list-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.competition-list-section h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.competition-list-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.competition-list-section ul li {
+    padding: 10px;
+    font-size: 16px;
+    border-bottom: 1px solid #ccc;
+}
+
+.competition-list-section ul li:last-child {
+    border-bottom: none;
+}
+
+.competition-list-section ul li:hover {
+    background-color: #f8f9fa;
+    cursor: pointer;
 }
