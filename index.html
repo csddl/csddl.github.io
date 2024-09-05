@@ -17,32 +17,40 @@
         </ul>
     </nav>
 
-    <!-- 竞赛信息部分 -->
+    <!-- 内容部分 -->
     <div id="competition-section" class="section">
-        <div id="competition-list" class="grid-container"></div>
+        <div id="competition-list"></div>
     </div>
 
-    <!-- 选课红黑榜部分 -->
     <div id="courses-section" class="section" style="display: none;">
         <h1>选课红黑榜</h1>
-        <div id="course-list" class="grid-container"></div>
+        <div id="course-list"></div>
     </div>
 
-    <!-- 学长说部分 -->
     <div id="testimonials-section" class="section" style="display: none;">
         <h1>学长说</h1>
-        <div id="testimonial-list" class="grid-container"></div>
+        <div id="testimonial-list"></div>
     </div>
 
     <script>
         // 导航栏点击切换显示的内容
         function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(section => section.style.display = 'none');
+            // 隐藏所有 section
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // 显示选中的 section
             document.getElementById(sectionId).style.display = 'block';
-            document.querySelectorAll('#navbar a').forEach(nav => nav.classList.remove('active'));
+
+            // 更新导航栏的选中状态
+            document.querySelectorAll('#navbar a').forEach(nav => {
+                nav.classList.remove('active');
+            });
             document.querySelector(`#nav-${sectionId.split('-')[0]}`).classList.add('active');
         }
 
+        // 确保日期能够正确格式化
         function formatDate(dateString) {
             const date = new Date(dateString);
             return isNaN(date) ? '无效日期' : date.toLocaleString();
@@ -71,14 +79,14 @@
                 });
             });
 
-        // 加载选课红黑榜信息
+        // 加载选课红黑榜
         fetch('data/courses.json')
             .then(response => response.json())
             .then(data => {
                 const courseList = document.getElementById('course-list');
                 data.forEach(course => {
                     const courseCard = document.createElement('div');
-                    courseCard.classList.add('card');
+                    courseCard.classList.add(course.rating === "红榜" ? 'green-card' : 'red-card');
                     courseCard.innerHTML = `
                         <h3>${course.name}</h3>
                         <p>${course.rating}：${course.comment}</p>
@@ -88,12 +96,12 @@
                 });
             });
 
-        // 加载学长说信息
+        // 加载学长说
         fetch('data/testimonials.json')
             .then(response => response.json())
             .then(data => {
                 const testimonialList = document.getElementById('testimonial-list');
-                data.sort((a, b) => new Date(b.time) - new Date(a.time)); // 按时间倒序排列
+                data.sort((a, b) => new Date(b.time) - new Date(a.time));  // 按时间倒序排列
                 data.forEach(testimonial => {
                     const testimonialCard = document.createElement('div');
                     testimonialCard.classList.add('card');
