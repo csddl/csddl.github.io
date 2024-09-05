@@ -14,6 +14,9 @@ nav {
     top: 0;
     left: 0;
     z-index: 100;
+    display: flex;
+    justify-content: space-between; /* 导航栏两端对齐 */
+    align-items: center;
 }
 
 nav ul {
@@ -21,7 +24,16 @@ nav ul {
     padding: 0;
     margin: 0;
     display: flex;
-    justify-content: flex-start; /* 导航项靠左对齐 */
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+/* 中间导航项的容器，居中显示 */
+.nav-center {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;  /* 使导航项占据中间部分的最大空间 */
 }
 
 nav ul li {
@@ -42,9 +54,26 @@ nav ul li a:hover, nav ul li a.active {
     background-color: #575757;
 }
 
-/* 保证 Update 按钮在导航栏的最右边 */
-nav ul li:last-child {
-    margin-left: auto; /* 将最后一个元素（Update 按钮）推到最右边 */
+/* Update 按钮样式 */
+.update-btn {
+    margin-right: 20px; /* 确保Update按钮右对齐 */
+}
+
+.update-btn a {
+    background-color: #f5f5f5;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.update-btn a:hover {
+    background-color: #ddd;
+}
+
+/* 导航项与 Update 按钮分布，使用flex-grow分配空间 */
+.nav-center li {
+    margin: 0 10px; /* 确保导航项之间有足够的间距 */
 }
 
 .section {
