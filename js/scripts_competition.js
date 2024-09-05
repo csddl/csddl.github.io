@@ -69,4 +69,9 @@ fetch('data/competitions.json')
                     <p>赛事文件：<a href="${competition.params_file}" target="_blank">下载参赛文件</a></p>
                     <p>推荐指数: <span class="stars">${stars}</span></p>
                     <p>赛事官网：<a href="${competition.website}" target="_blank">查看详情</a></p>
-                    <p>备注：${competition.remarks || '无
+                    <p>备注：${competition.remarks || '无'}</p>
+                `;
+                competitionList.appendChild(competitionCard);
+            });
+        }, 1000); // 每秒更新一次倒计时
+    });
