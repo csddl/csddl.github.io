@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理页面</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- 登录部分 -->
+    <div id="login-section" class="section">
+        <div class="login-container">
+            <h2>请登录</h2>
+            <form id="loginForm" onsubmit="return handleLogin(event)">
+                <label for="username">用户名：</label>
+                <input type="text" id="username" name="username" required><br><br>
+                <label for="password">密码：</label>
+                <input type="password" id="password" name="password" required><br><br>
+                <button type="submit">登录</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 更新竞赛信息部分，登录后显示 -->
+    <div id="update-section" class="section" style="display: none;">
+        <div class="update-container">
+            <h2>更新竞赛信息</h2>
+            <form id="updateForm">
+                <label for="competition-name">竞赛名称：</label>
+                <input type="text" id="competition-name" name="competition-name" required><br><br>
+                <label for="competition-category">类别：</label>
+                <input type="text" id="competition-category" name="competition-category" required><br><br>
+                <label for="competition-date">截止日期：</label>
+                <input type="date" id="competition-date" name="competition-date" required><br><br>
+                <button type="submit">更新信息</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 登录和更新的 JavaScript -->
+    <script>
+        let isLoggedIn = false;
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // 简单的登录验证逻辑
+            if (username === 'admin' && password === 'password') {
+                isLoggedIn = true;
+                alert('登录成功');
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('update-section').style.display = 'block';
+            } else {
+                alert('用户名或密码错误');
+            }
+        }
+    </script>
+
+</body>
+</html>
