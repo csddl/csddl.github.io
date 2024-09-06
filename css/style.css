@@ -80,6 +80,40 @@ nav ul li a:hover, nav ul li a.active {
     padding-top: 80px; /* 确保内容距离导航栏有足够的间距 */
 }
 
+/* Dropdown 菜单样式 */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
 /* Flexbox 布局，用于自适应卡片布局 */
 .list-container {
     display: flex;
@@ -138,4 +172,12 @@ p {
     .card, .green-card, .red-card {
         flex: 1 1 100%; /* 小屏幕每行显示 1 个卡片 */
     }
+}
+
+/* 最后更新时间的样式 */
+#last-update-time {
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+    margin-top: 20px;
 }
