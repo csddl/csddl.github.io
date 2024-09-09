@@ -1,13 +1,13 @@
 [
   {
-    "name": "USENIX Security 2025",
-    "category": "一类竞赛",
-    "signup_deadline": "2024-09-05T19:59:59",
-    "submission_deadline": "2024-09-15T23:59:59",
-    "level": "国赛",
-    "params_file": "https://example.com/params-file-usenix.pdf",
-    "recommendation": 4.5,
-    "website": "https://www.usenix.org/conference/usenixsecurity25",
+    "name": "睿抗机器人开发者大赛（RAICOM）",
+    "category": "二类竞赛",
+    "signup_deadline": "2024-09-30T19:59:59",
+    "submission_deadline": "2024-11-19T23:59:59",
+    "level": "省赛",
+    "params_file": "https://www.raicom.com.cn/content.html?cid=734",
+    "recommendation": 5,
+    "website": "https://www.raicom.com.cn/match-item.html?id=81",
     "remarks": "参赛需提供团队详细背景介绍。"
   },
   {
